@@ -1,13 +1,17 @@
 # CHANGELOG.md - Subsystem Revision History
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.3.0
+- **Version:** 1.4.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks revisions, architectural updates, and schema changes in the independent AI Video Engine repository.
 
 ---
 
 ## Change Log
+
+### [1.4.0] - 2026-08-08
+#### Added
+- Implemented `WORKFLOWS/store_collection_protocol.md` defining capture sequence parameters, checklists, and naming standards for physical store data collection.
 
 ### [1.3.0] - 2026-08-08
 #### Added

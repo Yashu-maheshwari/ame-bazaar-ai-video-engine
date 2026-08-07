@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.3.0
+- **Version:** 1.4.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has defined the `KNOWLEDGE/reference_standard.md` setting standards for storing, naming, indexing, and applying visual reference files to scenes.
+The repository has defined the `WORKFLOWS/store_collection_protocol.md` defining how physical showroom assets are captured, standardized, and stored for visual grounding.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has defined the `KNOWLEDGE/reference_standard.md` setting standar
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Implemented `WORKFLOWS/store_collection_protocol.md` defining capture specifications and folder schemas.
 - [x] Implemented `KNOWLEDGE/reference_standard.md` defining asset schemas and selection rules.
 - [x] Rewrote `README.md` as an AI-first Navigation Guide.
 - [x] Implemented `SYSTEM/ai_access_protocol.md` defining model-agnostic constraints and workflows.
