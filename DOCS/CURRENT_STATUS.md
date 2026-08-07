@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.1.0
+- **Version:** 1.2.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has implemented the universal `SYSTEM/ai_access_protocol.md` defining how reasoning engines scan and process video tasks sequentially.
+The repository `README.md` has been rewritten as an AI Navigation Guide, standardizing entry points, execution maps, and context loading sequences.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has implemented the universal `SYSTEM/ai_access_protocol.md` defi
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Rewrote `README.md` as an AI-first Navigation Guide.
 - [x] Implemented `SYSTEM/ai_access_protocol.md` defining model-agnostic constraints and workflows.
 - [x] Created `manifest.md` defining the complete repository index and dependency rules.
 - [x] Migrated modular structures (`SYSTEM/`, `ENGINE/`, `KNOWLEDGE/`, `WORKFLOWS/`, `TEMPLATES/`, `DOCS/`) to the independent repository.

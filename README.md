@@ -1,68 +1,68 @@
-# AME Bazaar AI Video Engine
+# AME Bazaar AI Video Engine - AI Navigation Guide
 
-## Purpose
-The AME Bazaar AI Video Engine is an open-source, AI-first documentation framework designed to be the single source of truth for generating professional, cinematic commercial video prompts. By storing production rules, storytelling parameters, and visual reference schemas directly in a structured repository, it enables reasoning engines (like ChatGPT, Gemini, Claude, and Antigravity) to build consistent, continuous multi-scene video prompts without relying on long, repetitive chats.
+## 1. Project Overview
+The AME Bazaar AI Video Engine is a specialized, open-source, AI-first documentation framework. It serves as a machine-readable blueprint for generating high-fidelity, visually consistent, multi-scene cinematic commercial video prompts.
 
-## Architecture
-This subsystem separates cinematic reasoning, platform constraints, and product/brand knowledge into independent, decoupled files:
-- **SYSTEM**: Core roles, filmmaker principles, and operating rules.
-- **ENGINE**: Operational pipelines including the Context Loader (token optimization) and Decision Engine.
-- **KNOWLEDGE**: Standard layouts, database schemas, and metadata frontmatter conventions.
-- **WORKFLOWS**: Execution steps and Git push policies.
-- **TEMPLATES**: Model-specific structures (e.g., Google Flow Prompt Standard).
+## 2. Purpose
+This repository acts as the permanent knowledge database. It replaces repetitive, long prompt instruction blocks, allowing reasoning engines (such as Gemini, ChatGPT, Claude, and Antigravity) to understand cinematic requirements, store layout structures, and prompt styles on-demand.
 
-## Quick Start
-To generate a new video production package, load this repository into your AI system's context and issue the following prompt:
-```text
-Read the repository instruction protocol, understand the system architecture, and follow the workflows to compile a Google Flow Production Package for: [Insert Campaign Brief Here]
-```
+## 3. Repository Architecture
+The system decouples core reasoning, execution workflow pipelines, and brand/visual assets into distinct modules to maintain single responsibility and minimize token overhead.
 
-## Repository Structure
-```text
-ame-bazaar-ai-video-engine/
-├── SYSTEM/                 # Core role and operating guidelines
-│   ├── system.md
-│   └── operating_rules.md
-├── ENGINE/                 # Subsystem modules
-│   ├── decision_engine.md
-│   ├── prompt_compiler.md
-│   └── context_loader.md
-├── KNOWLEDGE/              # Schema and metadata standards
-│   ├── knowledge_schema.md
-│   └── metadata_standard.md
-├── WORKFLOWS/              # Execution flows and Git rules
-│   ├── project_workflow.md
-│   └── git_policy.md
-├── TEMPLATES/              # Output format definitions
-│   └── google_flow_standard.md
-├── REFERENCE/              # Visual reference assets (images, videos)
-├── OUTPUT/                 # Compiled production outputs
-├── DOCS/                   # Subsidiary documentation
-│   └── project_vision.md
-├── ai_instruction_protocol.md  # Official entry point for AI systems
-├── LICENSE                 # MIT License
-└── README.md               # Main repository documentation
-```
+## 4. Repository Folder Map
+- [`SYSTEM/`](file:///D:/Projects/ame-bazaar-ai-video-engine/SYSTEM/): Core roles ([`system.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/SYSTEM/system.md)), search priorities ([`operating_rules.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/SYSTEM/operating_rules.md)), and model constraints ([`ai_access_protocol.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/SYSTEM/ai_access_protocol.md)).
+- [`ENGINE/`](file:///D:/Projects/ame-bazaar-ai-video-engine/ENGINE/): Decision and loader logic ([`context_loader.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/ENGINE/context_loader.md), [`decision_engine.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/ENGINE/decision_engine.md), [`prompt_compiler.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/ENGINE/prompt_compiler.md)).
+- [`KNOWLEDGE/`](file:///D:/Projects/ame-bazaar-ai-video-engine/KNOWLEDGE/): Data standards ([`knowledge_schema.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/KNOWLEDGE/knowledge_schema.md)) and document schemas ([`metadata_standard.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/KNOWLEDGE/metadata_standard.md)).
+- [`WORKFLOWS/`](file:///D:/Projects/ame-bazaar-ai-video-engine/WORKFLOWS/): Operational steps ([`project_workflow.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/WORKFLOWS/project_workflow.md)) and push sequences ([`git_policy.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/WORKFLOWS/git_policy.md)).
+- [`TEMPLATES/`](file:///D:/Projects/ame-bazaar-ai-video-engine/TEMPLATES/): Layout specifications ([`google_flow_standard.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/TEMPLATES/google_flow_standard.md)).
+- [`REFERENCE/`](file:///D:/Projects/ame-bazaar-ai-video-engine/REFERENCE/): Showroom and product reference media.
+- [`OUTPUT/`](file:///D:/Projects/ame-bazaar-ai-video-engine/OUTPUT/): Scene plans, scripts, and compiled prompt packages.
+- [`DOCS/`](file:///D:/Projects/ame-bazaar-ai-video-engine/DOCS/): subsidiary project briefs and roadmap logs.
 
-## Execution Flow
-1. **AI Instruction Protocol**: AI reads the entry point protocol.
-2. **Context Loader**: Scans the repository and loads only the required campaign/product files (minimizing tokens).
-3. **Decision Engine**: Generates a Project Analysis and Production Strategy Report.
-4. **User Approval**: User verifies the strategy.
-5. **Prompt Compiler**: Generates the final multi-scene production package matching the Google Flow Prompt Standard.
+## 5. AI Quick Start
+> [!IMPORTANT]
+> **If you are an AI assistant, read repository files in this exact sequence:**
+> 1. Read [`ai_instruction_protocol.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/ai_instruction_protocol.md) (execution entry point).
+> 2. Read [`SYSTEM/ai_access_protocol.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/SYSTEM/ai_access_protocol.md) (model constraints).
+> 3. Read [`manifest.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/manifest.md) (module relationships).
+> 4. Load [`ENGINE/context_loader.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/ENGINE/context_loader.md) (token optimization rules).
+> 5. Load only files flagged by the Context Loader matching user request parameters. **Never scan the entire repository.**
 
-## How AI Systems Should Use This Repository
-Every AI assistant or autonomous developer agent interacting with this repository MUST:
-1. **Read `ai_instruction_protocol.md`** first to establish execution order.
-2. **Scan `SYSTEM/` and `ENGINE/`** to understand parameters and guidelines.
-3. **Load only the required knowledge** matching the target campaign or product type.
-4. **Generate the final Google Flow Production Package** (Production Brief, Storyboard, Scene List, prompts, transitions, VO, editing notes) conforming to the `TEMPLATES/google_flow_standard.md` format.
-5. **Preserve strict scene continuity** across frames (no wardrobe resets, lighting changes, or showroom teleports).
-6. **Prioritize reference assets** over descriptive text. Use the Reference Asset Index to ground scenes in reality rather than inventing visuals.
+## 6. Human Quick Start
+To generate video prompts using this engine with ChatGPT, Gemini, or Claude:
+1. Clone this repository locally or reference its public link.
+2. In your AI prompt, tell the assistant: *"Load the AME Bazaar AI Video Engine repository. Read the `ai_instruction_protocol.md` and follow the guidelines to generate a cinematic production package for [Insert Brief here]."*
+3. The AI will parse the repository rules, analyze the brief, and generate standard output templates.
 
-## Roadmap
-1. [x] Core Architecture & Modularity Setup
-2. [x] AI Instruction Protocol & Context Loader Implementation
-3. [ ] Brand Bible & Color Schemes Mappings
-4. [ ] Store Showroom Angles Reference Asset Map
-5. [ ] First Pilot Production Campaign Run
+## 7. Repository Execution Pipeline
+`SYSTEM Rules` → `AI Access Protocol` → `Context Loader` → `Decision Engine (Brief Analysis)` → `User Strategy Approval` → `Prompt Compiler (Google Flow Prompt)` → `Git Push & Save`.
+
+## 8. Context Loading Strategy
+Refer to [`ENGINE/context_loader.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/ENGINE/context_loader.md). AI must dynamically filter and load only target modules (e.g., loading only `KNOWLEDGE/products/women_sarees.md` when building a Saree campaign).
+
+## 9. Google Flow Production Pipeline
+Prompts are compiled to follow the exact sections in [`TEMPLATES/google_flow_standard.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/TEMPLATES/google_flow_standard.md), creating clean, copy-pasteable prompt blocks containing camera movement, lighting, and scene actions.
+
+## 10. Reference Asset Workflow
+Descriptive text is secondary. Prompt compilers must ground scenes in real-world assets listed under the Reference Asset Index before adding fictional descriptions.
+
+## 11. Scene Continuity Philosophy
+Wardrobe, lighting, actors, and showroom display structures are locked. Scene N's starting frame must match the ending frame criteria of Scene N-1.
+
+## 12. Token Optimization Philosophy
+Avoid copying instruction files. Refer to structural files using file links and path references to minimize context token consumption.
+
+## 13. Repository Standards
+- File names: lowercase, underscore-separated.
+- Metadata: YAML frontmatter required.
+- Refactors: Modularity enforced, single responsibility per file.
+
+## 14. Current Development Roadmap
+- [x] Dedicated subsystem repo setup.
+- [x] AI Access and Instruction Protocols.
+- [x] Repository Manifest & Context Loader logic.
+- [ ] Brand Bible & Design Tokens database.
+- [ ] Showroom Layout Map & Reference Asset Index.
+
+## 15. Contribution Guidelines
+Submit Pull Requests containing singular feature extensions. Ensure modifications update [`DOCS/CHANGELOG.md`](file:///D:/Projects/ame-bazaar-ai-video-engine/DOCS/CHANGELOG.md) and conform to the metadata schemas.
