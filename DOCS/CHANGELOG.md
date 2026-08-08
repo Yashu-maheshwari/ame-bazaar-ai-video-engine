@@ -1,13 +1,19 @@
 # CHANGELOG.md - Subsystem Revision History
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.15.0
+- **Version:** 1.16.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks revisions, architectural updates, and schema changes in the independent AI Video Engine repository.
 
 ---
 
 ## Change Log
+
+### [1.16.0] - 2026-08-08
+#### Added
+- Ingested newly uploaded AME Bazaar store photos and walkthrough video under `REFERENCE/assets/` directory.
+- Built `REFERENCE/reference_index.md` mapping visual references (`R001`-`R006`) and walkthrough video `RV001`.
+- Updated `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md` unblocking environment-verified scenes.
 
 ### [1.15.0] - 2026-08-08
 #### Added

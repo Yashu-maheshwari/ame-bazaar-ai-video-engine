@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.15.0
+- **Version:** 1.16.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has defined the `WORKFLOWS/google_flow_handoff_protocol.md` defining how to take compiled scene prompt blueprints and execute manual uploads and continuity tracking in Google Flow.
+The repository has ingested 17 images and 1 video walkthrough under `REFERENCE/assets/` representing real store front, entrance, shelves, and counters. Mapped in `REFERENCE/reference_index.md` and updated `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md`.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has defined the `WORKFLOWS/google_flow_handoff_protocol.md` defin
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Ingested 18 visual references under `REFERENCE/assets/` and built `REFERENCE/reference_index.md`.
 - [x] Implemented Google Flow Handoff Protocol (`WORKFLOWS/google_flow_handoff_protocol.md`) establishing manual upload checklists and quality gates.
 - [x] Implemented visual asset audit report (`CAMPAIGNS/ame_bazaar_40sec_test/audit_report.md`) verifying local reference gaps.
 - [x] Fixed first test campaign reference grounding (`CAMPAIGNS/ame_bazaar_40sec_test/production_package.md`) replacing visual assumptions with model/product placeholders.
