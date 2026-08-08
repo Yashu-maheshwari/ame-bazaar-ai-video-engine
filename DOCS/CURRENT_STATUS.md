@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.7.0
+- **Version:** 1.8.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has defined the `KNOWLEDGE/brand_bible.md` establishing core identity properties, primary color values, typography rules, packaging specs, logo constraints, and product displays.
+The repository has defined the `KNOWLEDGE/reference_index_schema.md` establishing the permanent ID-based system for indexing store, camera, and product references.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has defined the `KNOWLEDGE/brand_bible.md` establishing core iden
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Implemented `KNOWLEDGE/reference_index_schema.md` establishing reference asset metadata standards.
 - [x] Implemented `KNOWLEDGE/brand_bible.md` establishing visual identity standards.
 - [x] Implemented `OUTPUT/scene_package_specification.md` defining compiler output schemas.
 - [x] Implemented `ENGINE/continuity_engine.md` defining camera parameters and transition rules.
