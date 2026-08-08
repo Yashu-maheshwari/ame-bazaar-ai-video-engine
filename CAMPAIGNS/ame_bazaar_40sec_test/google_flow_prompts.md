@@ -1,18 +1,19 @@
 # AME Bazaar AI Video Engine - Google Flow Prompts
-Version: 1.0
+Version: 2.0
 
 # GOOGLE FLOW PROMPTS: 40-SECOND TEST REEL
 
-Copy-paste ready prompts for Google Flow video generation:
+Copy-paste ready prompts for Google Flow video generation under the Authenticity Policy:
 
 ---
 
 ### Scene 01 Prompt
 - **Target Video Duration**: 5.0 seconds
-- **Reference Files to Upload**: `store_entrance_portrait_01.jpeg`, `store_walkthrough_vertical_01.mp4`
+- **Reference Files to Upload**: `store_walkthrough_vertical_01.mp4` (RV001)
+- **Authenticity Action**: **REAL FOOTAGE**. Do not run AI generator. Clip the first 5 seconds (0:00 - 0:05) directly from `store_walkthrough_vertical_01.mp4`.
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar entrance reference image store_entrance_portrait_01.jpeg and video walkthrough store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the exact entrance door architecture, blue steps, and poster signs. Camera tracks forward slowly, walking up the steps and pushing the glass door open to step inside the showroom. Realistic, photorealistic.
+  REAL FOOTAGE PREFERRED. Do not generate. Use original video clip from RV001 (0:00 - 0:05).
   ```
 
 ---
@@ -22,7 +23,7 @@ Copy-paste ready prompts for Google Flow video generation:
 - **Reference Files to Upload**: `kids_boy_section_landscape_01.jpeg`, `store_walkthrough_vertical_01.mp4`, `scene_01_final_frame.png` (seed)
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar kids section reference image kids_boy_section_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the exact wooden hangers, Funny Boy garment bags, and boxes. Camera pans slowly from left to right showing the kids section. Photorealistic.
+  REAL FOOTAGE PREFERRED. If generating: Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar kids section reference image kids_boy_section_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the authoritative environment references. Preserve the exact wooden hangers, Funny Boy garment bags, and boxes. Do not reconstruct or redesign the showroom architecture. Camera pans slowly from left to right showing the kids section. Photorealistic.
   ```
 
 ---
@@ -32,7 +33,7 @@ Copy-paste ready prompts for Google Flow video generation:
 - **Reference Files to Upload**: `mens_section_shirts_landscape_01.jpeg`, `store_walkthrough_vertical_01.mp4`, `scene_02_final_frame.png` (seed)
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar men's section reference image mens_section_shirts_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the exact white folding table surface, packed shirt boxes, and brand logos on shelves. Camera tilts down slowly. Photorealistic.
+  REAL FOOTAGE PREFERRED. If generating: Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar men's section reference image mens_section_shirts_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the authoritative environment references. Preserve the exact white folding table surface, packed shirt boxes, and brand logos on shelves. Do not invent shelves, walls, or logos. Camera tilts down slowly. Photorealistic.
   ```
 
 ---
@@ -42,7 +43,7 @@ Copy-paste ready prompts for Google Flow video generation:
 - **Reference Files to Upload**: `girls_section_shelves_landscape_01.jpeg`, `store_walkthrough_vertical_01.mp4`, `scene_03_final_frame.png` (seed)
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar showroom reference image girls_section_shelves_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the exact shelving layout, JMD packages, and folded clothing colors. Camera pushes in slowly. Photorealistic.
+  REAL FOOTAGE PREFERRED. If generating: Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar showroom reference image girls_section_shelves_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the authoritative environment references. Preserve the exact shelving layout, JMD packages, and folded clothing. Do not replace the actual store with a generic fashion store. Camera pushes in slowly. Photorealistic.
   ```
 
 ---
@@ -52,7 +53,7 @@ Copy-paste ready prompts for Google Flow video generation:
 - **Reference Files to Upload**: `trial_room_washroom_wide_landscape_01.jpeg`, `store_walkthrough_vertical_01.mp4`, `scene_04_final_frame.png` (seed)
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar reference image trial_room_washroom_wide_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the exact glossy white panels, trial room wood door, wash room door, and AC vent layout. Camera dollies forward down the aisle. Photorealistic.
+  REAL FOOTAGE PREFERRED. If generating: Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar reference image trial_room_washroom_wide_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the authoritative environment references. Preserve the exact glossy white panels, trial room wood door, wash room door, and AC vent layout. Camera dollies forward down the aisle. Photorealistic.
   ```
 
 ---
@@ -62,7 +63,7 @@ Copy-paste ready prompts for Google Flow video generation:
 - **Reference Files to Upload**: `billing_counter_portrait_01.jpeg`, `store_walkthrough_vertical_01.mp4`, `scene_05_final_frame.png` (seed)
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar billing counter reference image billing_counter_portrait_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the glass counter, wooden frame, LED shelf strip lights, and background Bazaar posters. Camera walks forward to stop at the counter. Photorealistic.
+  REAL FOOTAGE PREFERRED. If generating: Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar billing counter reference image billing_counter_portrait_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the authoritative environment references. Preserve the glass counter, wooden frame, LED shelf strip lights, and background Bazaar posters. Do not replace the real counter with a modern POS system. Camera walks forward to stop at the counter. Photorealistic.
   ```
 
 ---
@@ -72,7 +73,7 @@ Copy-paste ready prompts for Google Flow video generation:
 - **Reference Files to Upload**: `billing_counter_marble_landscape_01.jpeg`, `store_walkthrough_vertical_01.mp4`, `scene_06_final_frame.png` (seed)
 - **Text Prompt**:
   ```text
-  Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar counter reference image billing_counter_marble_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the primary environment references. Preserve the exact grey-brown marble counter, gold trim, and belt display case. Camera pans slowly left-to-right. Photorealistic.
+  REAL FOOTAGE PREFERRED. If generating: Cinematic 9:16 vertical, 35mm lens. Use the supplied AME Bazaar counter reference image billing_counter_marble_landscape_01.jpeg and walkthrough video store_walkthrough_vertical_01.mp4 as the authoritative environment references. Preserve the exact grey-brown marble counter, gold trim, and belt display case. Camera pans slowly left-to-right. Photorealistic.
   ```
 
 ---

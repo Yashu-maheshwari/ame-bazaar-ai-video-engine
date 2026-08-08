@@ -1,13 +1,18 @@
 # CHANGELOG.md - Subsystem Revision History
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.17.0
+- **Version:** 1.18.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks revisions, architectural updates, and schema changes in the independent AI Video Engine repository.
 
 ---
 
 ## Change Log
+
+### [1.18.0] - 2026-08-08
+#### Changed
+- Enforced Real-Store Authenticity Policy in `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md` and `google_flow_prompts.md`.
+- Added original walkthrough video override to Scene 01 to prevent generative AI reconstruction of the storefront entrance.
 
 ### [1.17.0] - 2026-08-08
 #### Added
