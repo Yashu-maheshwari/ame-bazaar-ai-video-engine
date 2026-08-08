@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.5.0
+- **Version:** 1.6.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has implemented the `ENGINE/continuity_engine.md` establishing visual tracking logic, transition rules, and focal calibration to locked boundaries between clips.
+The repository has defined the `OUTPUT/scene_package_specification.md` establishing the required structural parameters (action, metadata, camera, environment, reference assets) for generated scene packages.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has implemented the `ENGINE/continuity_engine.md` establishing vi
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Implemented `OUTPUT/scene_package_specification.md` defining compiler output schemas.
 - [x] Implemented `ENGINE/continuity_engine.md` defining camera parameters and transition rules.
 - [x] Implemented `WORKFLOWS/store_collection_protocol.md` defining capture specifications and folder schemas.
 - [x] Implemented `KNOWLEDGE/reference_standard.md` defining asset schemas and selection rules.
