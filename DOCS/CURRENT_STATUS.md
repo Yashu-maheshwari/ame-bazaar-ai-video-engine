@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.12.0
+- **Version:** 1.13.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has executed its first test campaign under `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md` compiling structured scene packages, continuity locks, and Google Flow prompts.
+The repository has updated `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md` to enforce strict reference-grounded prompts and character/product placeholder locks.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has executed its first test campaign under `CAMPAIGNS/ame_bazaar_
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Fixed first test campaign reference grounding (`CAMPAIGNS/ame_bazaar_40sec_test/production_package.md`) replacing visual assumptions with model/product placeholders.
 - [x] Executed first test campaign (`CAMPAIGNS/ame_bazaar_40sec_test/production_package.md`) compiling 8 chronological scene prompt cards.
 - [x] Implemented `ENGINE/scene_package_generator.md` defining parsers and handoff blocks.
 - [x] Implemented `ENGINE/production_planner.md` establishing layout structures and timelines.
