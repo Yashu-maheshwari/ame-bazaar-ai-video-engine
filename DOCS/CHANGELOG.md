@@ -1,13 +1,19 @@
 # CHANGELOG.md - Subsystem Revision History
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.16.0
+- **Version:** 1.17.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks revisions, architectural updates, and schema changes in the independent AI Video Engine repository.
 
 ---
 
 ## Change Log
+
+### [1.17.0] - 2026-08-08
+#### Added
+- Created complete copy-paste ready prompts file `CAMPAIGNS/ame_bazaar_40sec_test/google_flow_prompts.md`.
+- Created structured chronological alignment `CAMPAIGNS/ame_bazaar_40sec_test/scene_map.md`.
+- Rewrote `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md` mapping verified assets (`R001`-`R007`, `RV001`) and unblocking all 8 scenes without character/product references.
 
 ### [1.16.0] - 2026-08-08
 #### Added

@@ -1,14 +1,14 @@
 # CURRENT_STATUS.md - Subsystem State
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.16.0
+- **Version:** 1.17.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks the active lifecycle checklist of the AI Video Engine.
 
 ---
 
 ## 1. Project Status Summary
-The repository has ingested 17 images and 1 video walkthrough under `REFERENCE/assets/` representing real store front, entrance, shelves, and counters. Mapped in `REFERENCE/reference_index.md` and updated `CAMPAIGNS/ame_bazaar_40sec_test/production_package.md`.
+The repository has created a complete Google Flow-ready production package for the 40-second test reel, unblocking all 8 scenes using verified showroom references and adding `google_flow_prompts.md` and `scene_map.md`.
 
 ## 2. Environment Details
 - **Active Branch**: `main`
@@ -17,6 +17,7 @@ The repository has ingested 17 images and 1 video walkthrough under `REFERENCE/a
 ## 3. Task Checklist
 
 ### Completed Tasks
+- [x] Generated Google Flow Prompts (`CAMPAIGNS/ame_bazaar_40sec_test/google_flow_prompts.md`) and Scene Map (`CAMPAIGNS/ame_bazaar_40sec_test/scene_map.md`).
 - [x] Ingested 18 visual references under `REFERENCE/assets/` and built `REFERENCE/reference_index.md`.
 - [x] Implemented Google Flow Handoff Protocol (`WORKFLOWS/google_flow_handoff_protocol.md`) establishing manual upload checklists and quality gates.
 - [x] Implemented visual asset audit report (`CAMPAIGNS/ame_bazaar_40sec_test/audit_report.md`) verifying local reference gaps.
