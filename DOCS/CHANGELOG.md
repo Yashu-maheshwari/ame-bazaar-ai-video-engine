@@ -1,13 +1,17 @@
 # CHANGELOG.md - Subsystem Revision History
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.13.0
+- **Version:** 1.14.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks revisions, architectural updates, and schema changes in the independent AI Video Engine repository.
 
 ---
 
 ## Change Log
+
+### [1.14.0] - 2026-08-08
+#### Added
+- Implemented `CAMPAIGNS/ame_bazaar_40sec_test/audit_report.md` documenting visual asset search findings, GMB workspace access limitations, and recommended next captures.
 
 ### [1.13.0] - 2026-08-08
 #### Changed
