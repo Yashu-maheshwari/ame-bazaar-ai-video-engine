@@ -1,13 +1,17 @@
 # CHANGELOG.md - Subsystem Revision History
 
 - **Last Updated:** 2026-08-08
-- **Version:** 1.8.0
+- **Version:** 1.9.0
 - **Owner:** AI Video Engine Core
 - **Purpose:** Tracks revisions, architectural updates, and schema changes in the independent AI Video Engine repository.
 
 ---
 
 ## Change Log
+
+### [1.9.0] - 2026-08-08
+#### Added
+- Implemented `ENGINE/campaign_brief_analysis.md` establishing input parsing parameters, scene sequencing structures, and missing info flags for campaign generation.
 
 ### [1.8.0] - 2026-08-08
 #### Added
