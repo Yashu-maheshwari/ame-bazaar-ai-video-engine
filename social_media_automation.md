@@ -48,8 +48,13 @@ $$\text{REALISM} > \text{LOCATION AUTHENTICITY} > \text{CHARACTER CONSISTENCY} >
 ### 3.3 Maheshwari Counsel (Lawyer AI)
 * **Native Flow Identity**: Prompts compile around the user's native Google Flow / Gemini avatar without requiring manual master reference uploads.
 * **Advocate Appearance**: Formal black advocate coat, crisp white shirt, professional legal presence, realistic human proportions (no influencer styling, no superhero styling, no beauty filters).
+* **BCI Non-Solicitation & Professional Conduct (Hard Block)**:
+  * Strict prohibition against direct or indirect client solicitation (*"hire me"*, *"contact for case"*, *"book consultation"*, *"DM me"*).
+  * No case results, client testimonials, victory claims, or superiority statements (*"best lawyer"*, *"top advocate"*, *"guaranteed win"*).
+  * Permitted CTA styles strictly limited to neutral legal education (*"Follow Maheshwari Counsel for more legal awareness"*, *"Save this for future reference"*).
+  * Any promotional client-acquisition topic triggers a hard block: *"Professional-conduct review required before publishing."*
 * **Source of Truth Rule**: Treat user-supplied legal text as truth. Strictly avoid inventing statutes, sections, case laws, judgments, penalties, or procedures.
-* **Claim-Safety**: Never claim *"top advocate"*, *"guaranteed win"*, or *"100% case victory"*. Keep content strictly educational.
+
 
 ### 3.4 No-Person Cinematic (Style-Locked)
 * **Zero Humans Mandate**: Zero people, no avatars, no faces, no presenters.

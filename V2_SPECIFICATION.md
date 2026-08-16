@@ -215,13 +215,23 @@ Spoken dialogue is compiled into the `dialogue` JSON property. The visual prompt
 3. **Claim Safety Mandate**: Never auto-generate unverified marketing superlatives such as *"India's number one store"*, *"cheapest in Delhi"*, *"best prices in India"*, or *"most popular brand"*. Use authentic conversational phrases: *"Guys, agar aap women's wear dekh rahe ho, AME Bazaar mein ek baar collection check kar sakte ho."*
 4. **Smartphone Realism**: Use handheld, eye-level smartphone camera framing with natural depth of field and authentic in-store fluorescent/ambient lighting.
 
-### 7.3 Maheshwari Counsel (Lawyer AI): Legal Accuracy & Source of Truth Rules
-1. **Source of Truth Rule**: Treat the user's supplied legal information as the source of truth.
-2. **Strict Non-Invention Mandate**: Strictly do NOT invent sections, statutes, case laws, judgments, penalties, limitation periods, procedures, legal rights, deadlines, court rules, or legal conclusions.
-3. **Unverified Topics**: If the user provides only a topic and no verified legal information, generate a simple educational structure and clearly mark any facts that require statutory verification before publication (e.g. *'[Requires statutory verification]'*).
-4. **Claim Safety Mandate**: Never claim *"best lawyer"*, *"top advocate"*, *"guaranteed victory"*, or *"100% win rate"*. Keep output purely educational and informational.
-5. **Language**: Natural Indian English + Hinglish with accessible legal terms (*trademark*, *notice*, *infringement*, *registration*, *contract*).
-6. **Persona**: Informative, professional, calm, conversational, and authoritative without sounding promotional. A genuine lawyer-created educational Reel, NOT an AI-generated advertisement.
+### 7.3 Maheshwari Counsel (Lawyer AI): BCI Professional Conduct & Non-Solicitation Guardrails
+1. **Strict Non-Solicitation Mandate**: Never generate direct or indirect solicitation of clients or legal work.
+2. **Prohibited Client-Acquisition Language (Hard Block)**: Never say, imply, or suggest: *"Contact me for your case"*, *"Hire me"*, *"Book a consultation"*, *"DM me for legal help"*, *"Call me for your matter"*, *"I can get you bail"*, *"I will win your case"*, *"Best lawyer"*, *"Expert lawyer"*, *"Guaranteed result"*, *"Affordable legal services"*, *"Available for your case"*, or any equivalent client-acquisition phrasing.
+3. **No Case Results or Testimonials**: Never use past case victories, client testimonials, success rates, pending litigation matters, or case-specific publicity.
+4. **No Superiority Claims**: Never claim that Maheshwari Counsel is *"best"*, *"top"*, *"leading"*, *"specialist"*, *"No.1"*, or superior to other advocates.
+5. **Not an Advertisement**: The content must never be framed as an advertisement or commercial pitch for legal representation. The sole purpose is legal education, awareness, and general public legal information.
+6. **Dignified Advocate Persona**: The advocate may identify himself professionally as Maheshwari Counsel, but presentation must remain dignified, restrained, factual, and educational.
+7. **Strict Permitted CTA Style**: CTAs must never invite contact. Permitted CTA styles are limited to:
+   - *"Follow Maheshwari Counsel for more legal awareness."*
+   - *"Follow for more legal education."*
+   - *"Save this for future reference."*
+   - *"Share this information if you find it useful."*
+8. **No Engagement Requests**: Do not ask viewers to contact, DM, message, call, WhatsApp, book, hire, consult, or engage the advocate.
+9. **No Fear-Based / Litigation-Inducing Marketing**: Strictly prohibit scare tactics, emotional manipulation, or statements intended to induce litigation (e.g. encouraging viewers to file cases or bail applications merely to generate legal work).
+10. **Strict Source-Grounding**: Treat user-supplied legal facts as the absolute source of truth. Never invent or infer statutes, sections, penalties, or procedures.
+11. **Hard Compliance Block**: If a proposed topic or CTA creates a potential professional-conduct concern, the generation is blocked with: *"Professional-conduct review required before publishing."*
+
 
 ---
 

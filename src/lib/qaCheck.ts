@@ -143,6 +143,46 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
             ? 'Exaggerated legal claims detected' 
             : (!isCrispDelivery ? 'Dialogue too long for 5-second delivery' : 'Strictly grounded in verified source')
         });
+
+        // Check BCI Professional Conduct & Non-Solicitation Guardrail
+        const promptLower = (scene.googleFlowPrompt || '').toLowerCase();
+        const prohibitedSolicitation = [
+          'contact me for your case',
+          'hire me',
+          'hire us',
+          'book a consultation',
+          'book consultation',
+          'dm me for legal help',
+          'dm me for advice',
+          'dm for advice',
+          'call me for your matter',
+          'call me for legal',
+          'i can get you bail',
+          'i will win your case',
+          'best lawyer',
+          'top advocate',
+          'leading advocate',
+          'specialist lawyer',
+          'guaranteed result',
+          '100% success',
+          'affordable legal services',
+          'available for your case',
+          'whatsapp me',
+          'contact us for legal'
+        ];
+
+        const hasSolicitation = prohibitedSolicitation.some(term => 
+          dialogueLower.includes(term) || promptLower.includes(term)
+        );
+
+        checks.push({
+          id: `s${sceneNum}_bci_conduct`,
+          rule: `Scene ${sceneNum}: BCI Professional Conduct & Non-Solicitation`,
+          passed: !hasSolicitation,
+          details: hasSolicitation 
+            ? 'Professional-conduct review required before publishing.' 
+            : 'Compliant with BCI non-solicitation standards'
+        });
       } else if (isNoPerson) {
         // Check Style Anchor
         const envMasterLower = (scene.masterReferences?.environmentMaster || '').toLowerCase();
@@ -232,10 +272,28 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
     });
   }
 
+  // Check CTA BCI Compliance for Lawyer Counsel
+  if (isLawyerCounsel && plan.cta) {
+    const ctaLower = plan.cta.toLowerCase();
+    const prohibitedCtaTerms = ['hire', 'contact', 'call me', 'dm me', 'whatsapp', 'book consultation', 'engage', 'win your case'];
+    const hasBadCta = prohibitedCtaTerms.some(term => ctaLower.includes(term));
+
+    checks.push({
+      id: 'cta_bci_conduct',
+      rule: 'CTA: BCI Educational Non-Solicitation Compliance',
+      passed: !hasBadCta,
+      details: hasBadCta 
+        ? 'Professional-conduct review required before publishing.' 
+        : 'Compliant with BCI educational awareness standards'
+    });
+  }
+
   const total = checks.length;
   const passedCount = checks.filter(c => c.passed).length;
   const scorePercentage = total > 0 ? Math.round((passedCount / total) * 100) : 0;
-  const isProductionReady = scorePercentage >= 90 && checks.every(c => !c.id.includes('_master') || c.passed);
+  const isProductionReady = scorePercentage >= 90 && 
+    checks.every(c => !c.id.includes('_master') || c.passed) &&
+    checks.every(c => !c.id.includes('_bci_conduct') || c.passed);
 
   return {
     isProductionReady,
