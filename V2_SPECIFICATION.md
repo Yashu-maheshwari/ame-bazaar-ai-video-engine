@@ -215,41 +215,62 @@ Spoken dialogue is compiled into the `dialogue` JSON property. The visual prompt
 3. **Claim Safety Mandate**: Never auto-generate unverified marketing superlatives such as *"India's number one store"*, *"cheapest in Delhi"*, *"best prices in India"*, or *"most popular brand"*. Use authentic conversational phrases: *"Guys, agar aap women's wear dekh rahe ho, AME Bazaar mein ek baar collection check kar sakte ho."*
 4. **Smartphone Realism**: Use handheld, eye-level smartphone camera framing with natural depth of field and authentic in-store fluorescent/ambient lighting.
 
-### 7.3 Maheshwari Counsel (Lawyer AI): BCI Professional Conduct & Non-Solicitation Guardrails
-1. **Strict Non-Solicitation Mandate**: Never generate direct or indirect solicitation of clients or legal work.
-2. **Prohibited Client-Acquisition Language (Hard Block)**: Never say, imply, or suggest: *"Contact me for your case"*, *"Hire me"*, *"Book a consultation"*, *"DM me for legal help"*, *"Call me for your matter"*, *"I can get you bail"*, *"I will win your case"*, *"Best lawyer"*, *"Expert lawyer"*, *"Guaranteed result"*, *"Affordable legal services"*, *"Available for your case"*, or any equivalent client-acquisition phrasing.
-3. **No Case Results or Testimonials**: Never use past case victories, client testimonials, success rates, pending litigation matters, or case-specific publicity.
-4. **No Superiority Claims**: Never claim that Maheshwari Counsel is *"best"*, *"top"*, *"leading"*, *"specialist"*, *"No.1"*, or superior to other advocates.
-5. **Not an Advertisement**: The content must never be framed as an advertisement or commercial pitch for legal representation. The sole purpose is legal education, awareness, and general public legal information.
-6. **Dignified Advocate Persona**: The advocate may identify himself professionally as Maheshwari Counsel, but presentation must remain dignified, restrained, factual, and educational.
-7. **Strict Permitted CTA Style**: CTAs must never invite contact. Permitted CTA styles are limited to:
-   - *"Follow Maheshwari Counsel for more legal awareness."*
-   - *"Follow for more legal education."*
-   - *"Save this for future reference."*
-   - *"Share this information if you find it useful."*
-8. **No Engagement Requests**: Do not ask viewers to contact, DM, message, call, WhatsApp, book, hire, consult, or engage the advocate.
-9. **No Fear-Based / Litigation-Inducing Marketing**: Strictly prohibit scare tactics, emotional manipulation, or statements intended to induce litigation (e.g. encouraging viewers to file cases or bail applications merely to generate legal work).
-10. **Strict Source-Grounding**: Treat user-supplied legal facts as the absolute source of truth. Never invent or infer statutes, sections, penalties, or procedures.
-11. **Hard Compliance Block**: If a proposed topic or CTA creates a potential professional-conduct concern, the generation is blocked with: *"Professional-conduct review required before publishing."*
+### 7.3 Maheshwari Counsel (Lawyer AI): Source-First Architecture & BCI Non-Solicitation Guardrails
 
+#### Legal Content Pipeline
+$$\text{Topic} \rightarrow \text{Verified Source Fact Sheet} \rightarrow \text{Legal Accuracy Gate} \rightarrow \text{Reel Script} \rightarrow \text{BCI Non-Solicitation Gate} \rightarrow \text{Google Flow Prompts}$$
+
+1. **Rule 1 — Source-First Mandate**: The Reel Director must NEVER generate legal propositions directly from model knowledge. All legal facts must stem from verified statutory or judicial sources.
+2. **Rule 2 — Verified Fact Sheet (`verifiedFacts`)**: Every legal reel must compile an explicit `verifiedFacts` sheet containing:
+   - `id`: Unique identifier (e.g. `F1`, `F2`)
+   - `proposition`: Exact verified statutory rule or judgment ratio
+   - `source`: Official legislation or court name (e.g. *Trade Marks Act, 1999 (Act No. 47 of 1999)* or *Supreme Court of India*)
+   - `citation`: Section or case citation (e.g. *Section 29(1)*)
+   - `sourceUrl`: Official URL (e.g. `https://www.indiacode.nic.in/...`)
+   - `verificationDate`: Verification timestamp
+3. **Rule 3 — Fact Traceability & Anti-Invention**: Every sentence across Scene 1, Scene 2, and Scene 3 must be traceable to one or more `verifiedFacts` entries via `factIds`.
+   - **Zero Invented Remedies**: Strictly prohibit suggesting *"legal notice bhejna"*, *"injunction order lena"*, *"damages claim karna"*, or *"court approach karna"* unless that exact remedy is present in `verifiedFacts`.
+   - **No Inferred Procedure**: Never infer procedural timelines, penalties, court jurisdiction, or exceptions.
+4. **Rule 4 — Source Hierarchy**:
+   1. Current official legislation / India Code (`indiacode.nic.in`)
+   2. Official Supreme Court judgment/order (`main.sci.gov.in`)
+   3. Official High Court judgment/order
+   4. Official government / statutory regulator sources
+   5. Secondary sources permitted only for initial discovery
+5. **Rule 5 — Relevant Judgment Retrieval**: Retrieve and cite only relevant judgments/orders based on specific Act, Section, and legal issue.
+6. **Rule 6 — Currentness Verification**: If current legal status cannot be verified, block generation with: *"Current legal verification required before publishing."*
+7. **Rule 7 — BCI Professional Conduct & Non-Solicitation**:
+   - Zero-tolerance ban on client solicitation, consultation invites, fee claims, win guarantees, or superiority statements.
+   - Permitted CTA style strictly limited to neutral legal education:
+     * *"Follow Maheshwari Counsel for more legal awareness."*
+     * *"Follow for more legal education."*
+     * *"Save this for future reference."*
+     * *"Share this information if you find it useful."*
+8. **Rule 8 — 15-Second Delivery Limit**: Exactly 3 scenes (~5s each). If verified facts are brief, reuse and simplify verified facts across scenes rather than inventing new content.
+9. **Rule 9 — Automated Traceability QA**: QA strictly fails if any sentence lacks a verified `factId` or introduces ungrounded remedies.
+10. **Rule 10 — Preserved Foundations**: Native Google Flow Avatar, advocate attire (black coat, white shirt), 3-scene continuity, and visual realism remain locked.
 
 ---
 
 ## 8. Quality Assurance (QA) Checklist
 
 ### 8.1 Automated Application-Enforced Checks
-The internal QA engine evaluates each plan across 10+ validation checkpoints:
-- [x] `REAL_LOCATION_LOCK == true`
+The internal QA engine evaluates each plan across 12+ validation checkpoints:
+- [x] `REAL_LOCATION_LOCK == true` (or style-lock for Profile 4)
 - [x] Exactly 3 connected scenes generated
 - [x] Scene 1 has `continuityReference == 'None (Initial Setup)'`
 - [x] Scene 2 links to `frame_scene_1.png`
 - [x] Scene 3 links to `frame_scene_2.png`
-- [x] Valid Character Master attached to every scene
+- [x] Valid Character Master / Native Avatar attached to every scene
 - [x] Valid Environment Master attached to every scene
 - [x] Valid Voice Master attached to every scene
-- [x] Spoken dialogue non-empty and conversational
+- [x] Spoken dialogue non-empty and concise (~5s per scene)
 - [x] Camera instructions specify shot type, distance, and movement
 - [x] Negative constraints explicitly populated on every scene
+- [x] `Verified Source Fact Sheet Present (VERIFIED_FACTS)` (Profile 3)
+- [x] `Fact Traceability & Anti-Invention Gate` (Profile 3)
+- [x] `BCI Non-Solicitation Gate` for scenes and CTAs (Profile 3)
+- [x] `Zero-Human Compliance` (Profile 4)
 
 ---
 

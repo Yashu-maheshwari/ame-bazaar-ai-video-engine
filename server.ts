@@ -29,6 +29,22 @@ const reelSchema = {
   properties: {
     hook: { type: Type.STRING, description: "Catchy opening hook sentence" },
     environmentLock: { type: Type.BOOLEAN, description: "Whether REAL_LOCATION_LOCK is active" },
+    verifiedFacts: {
+      type: Type.ARRAY,
+      description: "Mandatory verified source fact sheet for legal content (Maheshwari Counsel)",
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          id: { type: Type.STRING, description: "Fact ID e.g. F1, F2" },
+          proposition: { type: Type.STRING, description: "Exact verified legal proposition" },
+          source: { type: Type.STRING, description: "Authoritative source (Act/Judgment/Statute)" },
+          citation: { type: Type.STRING, description: "Section/Act or Case Citation e.g. Section 29, Trade Marks Act, 1999" },
+          sourceUrl: { type: Type.STRING, description: "Official source URL e.g. https://www.indiacode.nic.in" },
+          verificationDate: { type: Type.STRING, description: "Verification date or current date" },
+        },
+        required: ["id", "proposition", "source"],
+      },
+    },
     scenes: {
       type: Type.ARRAY,
       items: {
@@ -36,6 +52,11 @@ const reelSchema = {
         properties: {
           sceneNumber: { type: Type.NUMBER, description: "Scene index (1, 2, 3)" },
           dialogue: { type: Type.STRING, description: "1-2 natural spoken sentences in Hinglish" },
+          factIds: {
+            type: Type.ARRAY,
+            items: { type: Type.STRING },
+            description: "List of VERIFIED_FACTS IDs (e.g. ['F1']) strictly supporting every sentence in this scene dialogue",
+          },
           visualAction: { type: Type.STRING, description: "1 short sentence of visual action" },
           masterReferences: {
             type: Type.OBJECT,
@@ -222,9 +243,45 @@ app.post("/api/generate-reel", async (req, res) => {
     The AI Reel Director's job is NOT to generate or recreate the lawyer's identity; its job is to create accurate, copy-paste-ready Google Flow prompts around the native avatar.
     ENVIRONMENT LOCK: REAL_LOCATION_LOCK = true
     
-    BAR COUNCIL OF INDIA (BCI) PROFESSIONAL CONDUCT & NON-SOLICITATION GUARDRAILS — MANDATORY & HARD BLOCK:
-    This profile is EXCLUSIVELY for educational legal awareness and dignified professional presence. It must strictly comply with Bar Council of India rules against advertising, solicitation, and touting.
+    LEGAL CONTENT PIPELINE (STRICT & MANDATORY):
+    TOPIC → VERIFIED SOURCE FACT SHEET → LEGAL ACCURACY GATE → REEL SCRIPT → BCI PROFESSIONAL CONDUCT GATE → GOOGLE FLOW PROMPTS
     
+    RULE 1 — SOURCE-FIRST (ABSOLUTE MANDATE):
+    The Reel Director must NEVER generate legal propositions directly from model knowledge.
+    All legal statements must strictly stem from verified statutory or judicial sources.
+    
+    RULE 2 — VERIFIED FACT SHEET ('verifiedFacts'):
+    You MUST output an explicit 'verifiedFacts' array before generating scene dialogue.
+    Every fact must contain:
+    - id: "F1", "F2", etc.
+    - proposition: Exact verified statutory rule or proposition (e.g. "Section 29 of the Trade Marks Act, 1999 defines infringement of a registered trademark when an identical or deceptively similar mark is used in the course of trade.")
+    - source: Official Act/Judgment name (e.g. "Trade Marks Act, 1999 (Act No. 47 of 1999)" or Supreme Court of India)
+    - citation: Section or Judgment Citation (e.g. "Section 29(1)")
+    - sourceUrl: Official link e.g. "https://www.indiacode.nic.in/handle/123456789/1993"
+    - verificationDate: "2026-08-16"
+    
+    RULE 3 — NO UNSUPPORTED LEGAL CONTENT & TRACEABILITY:
+    Every sentence in every scene MUST specify 'factIds' referencing the verified facts (e.g. ['F1', 'F2']).
+    If a sentence cannot be directly traced to a verified fact: DO NOT GENERATE IT.
+    - Do NOT paraphrase into a new legal proposition.
+    - Do NOT infer ungrounded remedies (e.g. NEVER suggest "legal notice bhejna", "injunction lena", "damages claim karna", "court jana" unless explicitly provided in the verified facts).
+    - Do NOT infer procedure, penalties, limitation periods, jurisdiction, exceptions, or court powers.
+    
+    RULE 4 — SOURCE HIERARCHY:
+    1. Current official legislation / India Code (indiacode.nic.in)
+    2. Official Supreme Court judgment/order (main.sci.gov.in)
+    3. Official High Court judgment/order
+    4. Official government/regulator source
+    5. Secondary sources only for discovery
+    
+    RULE 5 — RELEVANT JUDGMENT RETRIEVAL:
+    Do not cite or assume entire case corpora blindly. Cite only specific relevant provisions and authoritative ratios.
+    
+    RULE 6 — CURRENTNESS:
+    If the legal position may have changed or current verification cannot be established: BLOCK GENERATION and set hook to "Current legal verification required before publishing."
+    
+    RULE 7 — BAR COUNCIL OF INDIA (BCI) PROFESSIONAL CONDUCT & NON-SOLICITATION GATE:
+    This profile is EXCLUSIVELY for educational legal awareness and dignified professional presence.
     1. STRICT NON-SOLICITATION: Never generate direct or indirect solicitation of clients or legal work.
     2. PROHIBITED CLIENT-ACQUISITION PHRASES (STRICTLY FORBIDDEN):
        Never say, imply, or include any of the following or their equivalents in dialogue, CTA, or prompts:
@@ -239,23 +296,24 @@ app.post("/api/generate-reel", async (req, res) => {
        - "Affordable legal services" / "Low fees"
        - "Available for your case" / "Ready to represent you"
     3. NO CASE RESULTS OR TESTIMONIALS: Never use case results, client testimonials, past victories, success rates, pending court matters, or case-specific publicity.
-    4. NO SUPERIORITY CLAIMS: Never claim or imply that Maheshwari Counsel is superior to other advocates or a specialized expert firm.
+    4. NO SUPERIORITY CLAIMS: Never claim or imply that Maheshwari Counsel is superior to other advocates.
     5. NOT AN ADVERTISEMENT: The content must NEVER be framed as an advertisement or marketing pitch for legal representation.
-    6. PURPOSE: The primary purpose of every reel must be purely educational legal awareness, explanation of a legal concept, or general public legal information.
-    7. DIGNIFIED ADVOCATE PERSONA: The advocate may identify himself professionally as Maheshwari Counsel, but the tone and presentation must remain dignified, restrained, factual, and educational.
+    6. PURPOSE: Purely educational legal awareness, explanation of a legal concept, or general public legal information.
+    7. DIGNIFIED ADVOCATE PERSONA: The advocate may identify himself professionally as Maheshwari Counsel, but presentation must remain dignified, restrained, factual, and educational.
     8. STRICT PERMITTED CTA STYLE ONLY:
-       CTAs must NEVER invite contact. Only neutral educational CTAs are permitted, exactly following these styles:
+       CTAs must NEVER invite contact. Only neutral educational CTAs are permitted:
        - "Follow Maheshwari Counsel for more legal awareness."
        - "Follow for more legal education."
        - "Save this for future reference."
        - "Share this information if you find it useful."
-    9. NO ENGAGEMENT REQUESTS: Do not ask viewers to contact, DM, message, call, WhatsApp, book, hire, consult, or engage the advocate.
+    9. NO ENGAGEMENT REQUESTS: Do not ask viewers to contact, DM, message, call, WhatsApp, book, hire, consult, or engage.
     10. NO FEAR-BASED / URGENCY MARKETING: Do not use scare tactics, artificial urgency, emotional manipulation, or statements intended to induce litigation.
-    11. NO LITIGATION PROMOTION: Do not encourage viewers to file a case, police complaint, civil suit, appeal, or bail application merely to generate legal proceedings.
-    12. NO CLIENT CASE EXPOSURE: Never mention real cases involving the advocate or clients unless verified and cleared.
-    13. STRICT SOURCE-GROUNDING: Treat the user-provided legal facts as the absolute source of truth. Never invent, extrapolate, or infer statutes, sections, penalties, or procedures.
-    14. HARD COMPLIANCE ENFORCEMENT: If the topic or output creates a professional-conduct concern, output must be blocked with "Professional-conduct review required before publishing."
-
+    11. NO LITIGATION PROMOTION: Do not encourage viewers to file a case, complaint, or proceeding merely to generate legal proceedings.
+    
+    RULE 8 — 15-SECOND LIMIT (3 SCENES ~5s EACH):
+    Keep each scene's spoken dialogue short (1-2 crisp sentences, <= 25 words) for natural ~5-second delivery (~15 seconds total).
+    If verified facts are brief, REUSE and SIMPLIFY the verified facts across the 3 scenes rather than inventing new remedies or facts.
+    
     LAWYER PERSONA & ADVOCATE APPEARANCE:
     The native avatar must consistently appear as an Indian advocate representing Maheshwari Counsel.
     Professional appearance:
@@ -275,8 +333,9 @@ app.post("/api/generate-reel", async (req, res) => {
     3. Realism Mandate: Natural facial expressions, natural blinking, natural eye movement, natural lip synchronization, natural head movement, natural hand gestures, natural body movement, natural camera movement, natural lighting. No plastic skin, no exaggerated expressions, no robotic movement, no uncanny facial features.
 
     CONTINUITY & 3-SCENE PRODUCTION WORKFLOW (EXACTLY 3 CONNECTED SCENES, 15–30 SECONDS TOTAL):
-    - Scene 1 (Legal hook / problem - purely educational & non-soliciting):
+    - Scene 1 (Legal hook / problem - directly grounded in F1):
       * Dialogue: 1 short sentence spoken by the advocate in natural Indian English + Hinglish introducing the verified topic calmly.
+      * factIds: ["F1"]
       * visualAction: Native avatar in black advocate coat and white shirt addressing the camera with composed, reassuring eye contact and subtle natural hand gesture.
       * masterReferences: {
           characterMaster: "Native Google Flow Avatar",
@@ -291,8 +350,9 @@ app.post("/api/generate-reel", async (req, res) => {
       * negativeConstraints: "Do not change native avatar facial features or identity, no plastic skin, no AI beauty filter, no influencer styling, no superhero styling, no robotic movements, no dramatic courtroom props, no exaggerated facial expressions."
       * finalFrameToSave: "frame_scene_1.png"
 
-    - Scene 2 (Clear educational explanation using ONLY supplied verified facts):
-      * Dialogue: 1 short sentence explaining the core fact provided by the user with zero added legal propositions.
+    - Scene 2 (Clear educational explanation using ONLY supplied verified facts in F1/F2):
+      * Dialogue: 1 short sentence explaining the core fact from F1/F2 with zero added unverified remedies or legal propositions.
+      * factIds: ["F1", "F2"]
       * visualAction: Advocate explains the legal point with measured, natural hand gestures and calm facial expressions in the same professional setting.
       * masterReferences: {
           characterMaster: "Native Google Flow Avatar",
@@ -307,8 +367,9 @@ app.post("/api/generate-reel", async (req, res) => {
       * negativeConstraints: "Do not change native avatar facial identity, do not change black advocate coat or white shirt, no exaggerated dramatic gestures, no plastic skin, no robotic movement."
       * finalFrameToSave: "frame_scene_2.png"
 
-    - Scene 3 (Summary of provided facts + neutral educational CTA):
-      * Dialogue: 1 short sentence summarizing the concept cleanly and delivering a neutral awareness CTA (e.g. 'Legal awareness ke liye follow Maheshwari Counsel').
+    - Scene 3 (Summary of verified facts + neutral educational CTA):
+      * Dialogue: 1 short sentence summarizing the verified facts cleanly without inventing remedies, and delivering a neutral awareness CTA (e.g. 'Aise legal provisions samajhne ke liye follow Maheshwari Counsel').
+      * factIds: ["F1", "F2"]
       * visualAction: Advocate delivers the concluding takeaway with a composed, reassuring nod towards the camera.
       * masterReferences: {
           characterMaster: "Native Google Flow Avatar",

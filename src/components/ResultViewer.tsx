@@ -98,6 +98,44 @@ export default function ResultViewer({ plan }: ResultViewerProps) {
         <p className="text-xl font-bold text-neutral-900 leading-snug">"{plan.hook}"</p>
       </section>
 
+      {/* Verified Source Fact Sheet for Legal Content */}
+      {plan.verifiedFacts && plan.verifiedFacts.length > 0 && (
+        <section className="bg-indigo-50/70 rounded-2xl border border-indigo-200 p-5 shadow-xs space-y-3">
+          <div className="flex items-center justify-between border-b border-indigo-200/80 pb-2.5">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-indigo-700" />
+              <h3 className="text-sm font-bold text-indigo-950">Verified Source Fact Sheet (Mandatory Legal Grounding)</h3>
+            </div>
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 border border-indigo-300">
+              Source-First Architecture
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+            {plan.verifiedFacts.map((fact) => (
+              <div key={fact.id} className="bg-white p-3 rounded-xl border border-indigo-200 shadow-2xs space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-extrabold px-1.5 py-0.5 rounded bg-indigo-900 text-white">
+                    {fact.id}
+                  </span>
+                  <span className="text-[11px] text-neutral-500 font-mono">
+                    {fact.citation || fact.source}
+                  </span>
+                </div>
+                <p className="text-xs font-medium text-neutral-900 leading-relaxed pt-0.5">
+                  {fact.proposition}
+                </p>
+                {fact.sourceUrl && (
+                  <div className="text-[10px] text-indigo-600 truncate pt-1 font-mono">
+                    Source: {fact.sourceUrl}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Scene Cards */}
       <section className="space-y-6">
         {plan.scenes.map((scene, idx) => (
@@ -116,6 +154,12 @@ export default function ResultViewer({ plan }: ResultViewerProps) {
               </div>
 
               <div className="flex items-center gap-2">
+                {scene.factIds && scene.factIds.length > 0 && (
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    Facts: {scene.factIds.join(', ')}
+                  </span>
+                )}
                 <span className="px-2.5 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold flex items-center gap-1">
                   <Film className="w-3.5 h-3.5" />
                   Google Flow Sequence

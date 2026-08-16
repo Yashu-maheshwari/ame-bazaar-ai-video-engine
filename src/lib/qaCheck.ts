@@ -25,6 +25,20 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
     details: `Generated ${plan.scenes?.length || 0} scenes.`
   });
 
+  // Lawyer AI Root Gate: Verified Source Fact Sheet
+  if (isLawyerCounsel) {
+    const hasVerifiedFacts = Array.isArray(plan.verifiedFacts) && plan.verifiedFacts.length > 0 &&
+      plan.verifiedFacts.every(f => f.id && f.proposition && f.source);
+    checks.push({
+      id: 'legal_verified_facts',
+      rule: 'Verified Source Fact Sheet Present (VERIFIED_FACTS)',
+      passed: hasVerifiedFacts,
+      details: hasVerifiedFacts 
+        ? `${plan.verifiedFacts?.length} verified fact(s) indexed with statutory citations.` 
+        : 'Missing or incomplete VERIFIED_FACTS source sheet.'
+    });
+  }
+
   if (plan.scenes) {
     plan.scenes.forEach((scene, index) => {
       const sceneNum = scene.sceneNumber || index + 1;
@@ -125,8 +139,34 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
           details: scene.masterReferences?.voiceMaster || 'Missing voice master'
         });
 
-        // Check Strict Legal Source-Grounding & Claim Safety
+        // Check Strict Legal Fact Traceability (RULE 3 & RULE 9)
+        const hasFactIds = Array.isArray(scene.factIds) && scene.factIds.length > 0;
+        const validFactIds = hasFactIds && scene.factIds?.every(fid => 
+          plan.verifiedFacts?.some(f => f.id === fid)
+        );
+
+        // Anti-Invention of Unverified Remedies/Procedures check
         const dialogueLower = (scene.dialogue || '').toLowerCase();
+        const unverifiedRemedies = ['legal notice', 'injunction', 'stay order', 'damages claim', 'court approach', 'fir darj', 'file case'];
+        
+        // Find if dialogue mentions an unverified remedy not present in the facts
+        const allFactsText = (plan.verifiedFacts || []).map(f => `${f.proposition} ${f.source}`).join(' ').toLowerCase();
+        const containsInventedRemedy = unverifiedRemedies.some(rem => 
+          dialogueLower.includes(rem) && !allFactsText.includes(rem)
+        );
+
+        const factTraceabilityPassed = (validFactIds || (plan.verifiedFacts && plan.verifiedFacts.length > 0)) && !containsInventedRemedy;
+
+        checks.push({
+          id: `s${sceneNum}_fact_traceability`,
+          rule: `Scene ${sceneNum}: Fact Traceability & Anti-Invention Gate`,
+          passed: factTraceabilityPassed,
+          details: containsInventedRemedy 
+            ? 'Invented remedy detected (not in verified facts).' 
+            : (hasFactIds ? `Traceable to [${scene.factIds?.join(', ')}]` : 'Grounded in verified facts')
+        });
+
+        // Check Strict Legal Brevity & Claim Safety
         const hasExaggeratedClaims = dialogueLower.includes('best lawyer') || 
                                      dialogueLower.includes('top advocate') || 
                                      dialogueLower.includes('100% win') || 
@@ -137,11 +177,11 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
 
         checks.push({
           id: `s${sceneNum}_source_grounding`,
-          rule: `Scene ${sceneNum}: Source-Grounded Dialogue & Claim Safety`,
+          rule: `Scene ${sceneNum}: 5-Second Brevity & Claim Safety`,
           passed: !hasExaggeratedClaims && isCrispDelivery,
           details: hasExaggeratedClaims 
             ? 'Exaggerated legal claims detected' 
-            : (!isCrispDelivery ? 'Dialogue too long for 5-second delivery' : 'Strictly grounded in verified source')
+            : (!isCrispDelivery ? 'Dialogue too long for 5-second delivery' : 'Concise & claim-safe')
         });
 
         // Check BCI Professional Conduct & Non-Solicitation Guardrail
@@ -293,7 +333,9 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
   const scorePercentage = total > 0 ? Math.round((passedCount / total) * 100) : 0;
   const isProductionReady = scorePercentage >= 90 && 
     checks.every(c => !c.id.includes('_master') || c.passed) &&
-    checks.every(c => !c.id.includes('_bci_conduct') || c.passed);
+    checks.every(c => !c.id.includes('_bci_conduct') || c.passed) &&
+    checks.every(c => !c.id.includes('_fact_traceability') || c.passed) &&
+    checks.every(c => c.id !== 'legal_verified_facts' || c.passed);
 
   return {
     isProductionReady,

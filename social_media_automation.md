@@ -48,13 +48,13 @@ $$\text{REALISM} > \text{LOCATION AUTHENTICITY} > \text{CHARACTER CONSISTENCY} >
 ### 3.3 Maheshwari Counsel (Lawyer AI)
 * **Native Flow Identity**: Prompts compile around the user's native Google Flow / Gemini avatar without requiring manual master reference uploads.
 * **Advocate Appearance**: Formal black advocate coat, crisp white shirt, professional legal presence, realistic human proportions (no influencer styling, no superhero styling, no beauty filters).
+* **Source-First Legal Pipeline**:
+  $$\text{Topic} \rightarrow \text{Verified Source Fact Sheet} \rightarrow \text{Legal Accuracy Gate} \rightarrow \text{Reel Script} \rightarrow \text{BCI Non-Solicitation Gate} \rightarrow \text{Google Flow Prompts}$$
 * **BCI Non-Solicitation & Professional Conduct (Hard Block)**:
   * Strict prohibition against direct or indirect client solicitation (*"hire me"*, *"contact for case"*, *"book consultation"*, *"DM me"*).
   * No case results, client testimonials, victory claims, or superiority statements (*"best lawyer"*, *"top advocate"*, *"guaranteed win"*).
   * Permitted CTA styles strictly limited to neutral legal education (*"Follow Maheshwari Counsel for more legal awareness"*, *"Save this for future reference"*).
   * Any promotional client-acquisition topic triggers a hard block: *"Professional-conduct review required before publishing."*
-* **Source of Truth Rule**: Treat user-supplied legal text as truth. Strictly avoid inventing statutes, sections, case laws, judgments, penalties, or procedures.
-
 
 ### 3.4 No-Person Cinematic (Style-Locked)
 * **Zero Humans Mandate**: Zero people, no avatars, no faces, no presenters.
@@ -120,11 +120,24 @@ $$\text{Identity Anchor} \rightarrow \text{Environment Reference} \rightarrow \t
 
 ---
 
-## 7. Legal & Educational Fact-Source Rules
+## 7. Legal & Educational Fact-Source Rules (Source-First Architecture)
 
-1. **Verified-Source-Only Mandate**: The AI compiler must never present unverified facts or invent statutory provisions.
-2. **No Invention Rule**: If specific legal sections, case citations, or syllabus derivations are not provided, the compiler uses general educational concepts.
-3. **Verification Required Flag**: Any factual assertion requiring statutory confirmation is marked with `[Requires statutory verification]` prior to publication.
+1. **Rule 1 — Source-First Mandate**: The Reel Director must NEVER generate legal propositions directly from model knowledge.
+2. **Rule 2 — Verified Fact Sheet (`verifiedFacts`)**: Mandatory compilation of a structured fact sheet (`id`, `proposition`, `source`, `citation`, `sourceUrl`, `verificationDate`) before dialogue generation.
+3. **Rule 3 — Traceability & Zero Invented Remedies**: Every sentence in every scene must be traceable to one or more `verifiedFacts` entries via `factIds`. Strictly prohibits inventing remedies (*"legal notice bhejna"*, *"injunction order lena"*, *"court approach karna"*), procedures, penalties, or limitation periods.
+4. **Rule 4 — Authoritative Source Hierarchy**:
+   1. Current official legislation / India Code (`indiacode.nic.in`)
+   2. Official Supreme Court judgment/order (`main.sci.gov.in`)
+   3. Official High Court judgment/order
+   4. Official government/regulator sources
+   5. Secondary sources only for discovery
+5. **Rule 5 — Relevant Judgment Retrieval**: Only cite specific relevant statutory sections and authoritative ratios.
+6. **Rule 6 — Currentness Verification**: If current legal status cannot be verified, generation is blocked with: *"Current legal verification required before publishing."*
+7. **Rule 7 — BCI Non-Solicitation Compliance**: Strict ban on client solicitation, consultation invites, victory claims, or fee mentions.
+8. **Rule 8 — 15-Second Delivery Limit**: Exactly 3 scenes (~5s each). If verified facts are brief, reuse and simplify verified facts across scenes rather than inventing new content.
+9. **Rule 9 — Automated QA Traceability Check**: Hard QA gate validating fact IDs and rejecting ungrounded remedies.
+10. **Rule 10 — Preserved Foundations**: Native Google Flow Avatar, advocate attire, 3-scene continuity, and visual realism remain locked.
+
 
 ---
 

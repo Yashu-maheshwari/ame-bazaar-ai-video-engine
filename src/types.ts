@@ -4,6 +4,15 @@ export interface MasterReferences {
   voiceMaster?: string;
 }
 
+export interface VerifiedFact {
+  id: string;
+  proposition: string;
+  source: string;
+  citation?: string;
+  sourceUrl?: string;
+  verificationDate?: string;
+}
+
 export interface FastScene {
   sceneNumber: number;
   dialogue: string;
@@ -17,6 +26,7 @@ export interface FastScene {
   googleFlowPrompt: string;
   negativeConstraints?: string;
   finalFrameToSave: string;
+  factIds?: string[];
 }
 
 export interface QACheckItem {
@@ -38,6 +48,7 @@ export interface FastReelPlan {
   presetProfile: string;
   scenes: FastScene[];
   cta: string;
+  verifiedFacts?: VerifiedFact[];
   qaResult?: ProductionQAResult;
 }
 
