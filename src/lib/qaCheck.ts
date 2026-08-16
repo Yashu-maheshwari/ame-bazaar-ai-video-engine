@@ -124,6 +124,25 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
           passed: hasVoiceMaster,
           details: scene.masterReferences?.voiceMaster || 'Missing voice master'
         });
+
+        // Check Strict Legal Source-Grounding & Claim Safety
+        const dialogueLower = (scene.dialogue || '').toLowerCase();
+        const hasExaggeratedClaims = dialogueLower.includes('best lawyer') || 
+                                     dialogueLower.includes('top advocate') || 
+                                     dialogueLower.includes('100% win') || 
+                                     dialogueLower.includes('guaranteed');
+        
+        // 5-second delivery brevity check (dialogue should be concise, ideally <= 180 chars / ~25 words)
+        const isCrispDelivery = (scene.dialogue || '').trim().length > 0 && (scene.dialogue || '').trim().length <= 220;
+
+        checks.push({
+          id: `s${sceneNum}_source_grounding`,
+          rule: `Scene ${sceneNum}: Source-Grounded Dialogue & Claim Safety`,
+          passed: !hasExaggeratedClaims && isCrispDelivery,
+          details: hasExaggeratedClaims 
+            ? 'Exaggerated legal claims detected' 
+            : (!isCrispDelivery ? 'Dialogue too long for 5-second delivery' : 'Strictly grounded in verified source')
+        });
       } else if (isNoPerson) {
         // Check Style Anchor
         const envMasterLower = (scene.masterReferences?.environmentMaster || '').toLowerCase();

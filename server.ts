@@ -235,40 +235,24 @@ app.post("/api/generate-reel", async (req, res) => {
     - NO artificial beauty filter
     Maintain the same native avatar identity across all scenes.
 
+    STRICT SOURCE-GROUNDED LEGAL CONTENT RULES — MANDATORY:
+    1. STRICT SOURCE GROUNDING: Treat the user-provided legal information as the sole and absolute source of truth.
+    2. NO INVENTED PROPOSITIONS: NEVER add, infer, complete, extrapolate, paraphrase into a new legal proposition, or creatively expand any legal fact beyond the user-provided verified information.
+    3. DIRECT SENTENCE SUPPORT: Every single spoken dialogue sentence across Scene 1, Scene 2, and Scene 3 must be directly and verifiably supported by the provided information.
+    4. INSUFFICIENT INFORMATION REUSE: If the provided information is brief or insufficient for a 3-scene reel, do NOT invent content. Instead, divide, repeat key terms, or simplify the verified facts across the 3 scenes.
+    5. SCENE 3 SUMMARY ONLY: Scene 3 must strictly summarize the provided verified information only. It must NEVER introduce a new legal test, requirement, consequence, exception, penalty, procedure, court forum, or interpretation.
+    6. PROHIBITED UNGROUNDED TERMS: Never introduce legal terms or concepts such as "public", "confusion", "penalty", "deadline", "court", "registration", "remedy", "fine", "imprisonment", "section" unless that exact term or concept is explicitly present in the user-provided prompt/source material.
+    7. DELIVERY BREVITY: Keep spoken dialogue in natural Indian English + Hinglish (in English script), but keep each scene short and punchy (1-2 brief sentences, under 25 words) for natural 5-second delivery.
+    8. CLAIM SAFETY MANDATE: Never automatically claim: "best lawyer", "expert lawyer", "top advocate", "guaranteed result", "100% success", "win your case". Keep content strictly educational and informational.
+
     ENVIRONMENT & REALISM:
     1. Do NOT force a permanent office/chambers reference upload.
     2. The environment may be selected naturally according to the topic, but must remain realistic and professional (e.g., quiet professional legal consultation room, tidy desk, clean legal books backdrop, subtle office lighting).
     3. Realism Mandate: Natural facial expressions, natural blinking, natural eye movement, natural lip synchronization, natural head movement, natural hand gestures, natural body movement, natural camera movement, natural lighting. No plastic skin, no exaggerated expressions, no robotic movement, no uncanny facial features.
 
-    LEGAL INFORMATION RULE — CRITICAL & SOURCE OF TRUTH:
-    1. Treat the user's supplied legal information as the source of truth.
-    2. Strictly do NOT invent:
-       - sections
-       - statutes
-       - case laws
-       - judgments
-       - penalties
-       - limitation periods
-       - procedures
-       - legal rights
-       - deadlines
-       - court rules
-       - legal conclusions
-    3. Do not silently add legal facts merely to make the Reel more interesting.
-    4. If the user provides only a topic and no verified legal information, generate a simple educational structure but clearly mark any legal facts that require verification before publication (e.g. '[Requires statutory verification]').
-    5. Do not present uncertain legal information as confirmed law.
-    6. Never automatically claim: "best lawyer", "expert lawyer", "top advocate", "guaranteed result", "100% success", "win your case". Keep content strictly educational and informational.
-
-    LANGUAGE & STYLE:
-    1. Natural Indian English + Hinglish (in English script).
-    2. Use normal legal English terminology where appropriate: law, notice, trademark, copyright, infringement, contract, evidence, court, appeal, registration, etc.
-    3. Do not use overly formal Hindi. Do not translate standard legal terminology into awkward Hindi.
-    4. Delivery should sound like an Indian advocate naturally explaining a legal concept to an ordinary viewer.
-    5. Style: Informative, Professional, Calm, Conversational, Authoritative without sounding promotional. A genuine lawyer-created educational Reel, NOT an AI-generated advertisement.
-
     CONTINUITY & 3-SCENE PRODUCTION WORKFLOW (EXACTLY 3 CONNECTED SCENES, 15–30 SECONDS TOTAL):
-    - Scene 1 (Legal hook / problem):
-      * Dialogue: Spoken by the advocate in natural Indian English + Hinglish directly introducing the legal hook/problem.
+    - Scene 1 (Legal hook / problem - directly source-grounded):
+      * Dialogue: 1 short sentence spoken by the advocate in natural Indian English + Hinglish introducing the verified topic.
       * visualAction: Native avatar in black advocate coat and white shirt addressing the camera with composed, reassuring eye contact and subtle natural hand gesture.
       * masterReferences: {
           characterMaster: "Native Google Flow Avatar",
@@ -283,8 +267,8 @@ app.post("/api/generate-reel", async (req, res) => {
       * negativeConstraints: "Do not change native avatar facial features or identity, no plastic skin, no AI beauty filter, no influencer styling, no superhero styling, no robotic movements, no dramatic courtroom props, no exaggerated facial expressions."
       * finalFrameToSave: "frame_scene_1.png"
 
-    - Scene 2 (Clear explanation using ONLY supplied legal information):
-      * Dialogue: Advocate clearly explains the legal concept using only the supplied legal information with a simple, everyday example.
+    - Scene 2 (Clear explanation using ONLY supplied verified facts):
+      * Dialogue: 1 short sentence explaining the core fact provided by the user with zero added legal propositions.
       * visualAction: Advocate explains the legal point with measured, natural hand gestures and calm facial expressions in the same professional setting.
       * masterReferences: {
           characterMaster: "Native Google Flow Avatar",
@@ -299,9 +283,9 @@ app.post("/api/generate-reel", async (req, res) => {
       * negativeConstraints: "Do not change native avatar facial identity, do not change black advocate coat or white shirt, no exaggerated dramatic gestures, no plastic skin, no robotic movement."
       * finalFrameToSave: "frame_scene_2.png"
 
-    - Scene 3 (Practical takeaway + educational CTA):
-      * Dialogue: Advocate delivers a practical takeaway and educational CTA (e.g. consult for specific advice / follow for more legal awareness).
-      * visualAction: Advocate delivers the concluding advice with a composed, reassuring smile and nod towards the camera.
+    - Scene 3 (Summary of provided facts + simple educational takeaway):
+      * Dialogue: 1 short sentence summarizing only the supplied facts and giving a simple educational awareness takeaway (e.g. 'Aise aur legal concepts samajhne ke liye follow karein').
+      * visualAction: Advocate delivers the concluding takeaway with a composed, reassuring nod towards the camera.
       * masterReferences: {
           characterMaster: "Native Google Flow Avatar",
           environmentMaster: "Realistic Professional Legal Setting",
