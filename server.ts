@@ -7,9 +7,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 app.use(express.json());
+
+// Health check endpoint for production monitoring & container probes
+app.get("/api/health", (_req, res) => {
+  res.json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Initialize Gemini Client with lazy initialization
 let ai: GoogleGenAI | null = null;
@@ -99,16 +108,24 @@ const reelSchema = {
 
 app.post("/api/generate-reel", async (req, res) => {
   try {
-    const { prompt, profile } = req.body;
+    const { prompt, profile } = req.body || {};
     
-    if (!prompt) {
-      return res.status(400).json({ error: "Prompt is required." });
+    if (!prompt || typeof prompt !== "string" || !prompt.trim()) {
+      return res.status(400).json({ error: "Prompt is required and must be a non-empty string." });
+    }
+
+    const validProfiles = ["wife-teacher", "ame-bazaar", "maheshwari-counsel", "ai-influencer", "no-person"];
+    const targetProfile = profile || "wife-teacher";
+    if (profile && !validProfiles.includes(profile)) {
+      return res.status(400).json({
+        error: `Invalid profile '${profile}'. Allowed profiles: ${validProfiles.join(", ")}`
+      });
     }
 
     const client = getAIClient();
     
     let profileRules = "";
-    if (profile === "wife-teacher") {
+    if (targetProfile === "wife-teacher") {
       profileRules = `
     PROFILE: Wife AI Teacher (Coaching Centre)
     ENVIRONMENT LOCK: REAL_LOCATION_LOCK = true
@@ -166,7 +183,7 @@ app.post("/api/generate-reel", async (req, res) => {
     - Camera Spec: "[cameraInstruction]"
     - Negative Constraints: "Negative constraints: Do not change teacher face or identity, do not redesign classroom or move board, no plastic skin, no AI beauty filters, no robotic movement, no unexplained camera jumps."
       `;
-    } else if (profile === "ame-bazaar") {
+    } else if (targetProfile === "ame-bazaar") {
       profileRules = `
     PROFILE: AME Bazaar AI Influencer
     BUSINESS: AME Bazaar (Real family garments store in Kirari, Delhi)
@@ -233,7 +250,7 @@ app.post("/api/generate-reel", async (req, res) => {
     Each scene's googleFlowPrompt MUST be built in this strict sequence without any duplicated phrases (e.g. NEVER write 'Influencer performs Influencer stands...'):
     "Identity: Preserve exact facial identity, natural skin texture, hair, and casual styling from AME_BAZAAR_INFLUENCER_MASTER (no plastic skin, no AI beauty filter). Environment: Real AME Bazaar store in Kirari Delhi from [scene-specific reference e.g. REAL_STORE_MASTER (Entrance / Exterior Reference)]. Continuity: Visual continuity linked directly to [continuityReference]. Action: [visualAction]. Natural lip movement for conversational Hinglish speaking. Camera: [cameraInstruction]. Realism: Authentic smartphone video, natural handheld movement, realistic autofocus, natural exposure, realistic clothing movement. Negative constraints: [negativeConstraints]."
       `;
-    } else if (profile === "maheshwari-counsel") {
+    } else if (targetProfile === "maheshwari-counsel") {
       profileRules = `
     PROFILE: Maheshwari Counsel (Lawyer AI)
     PURPOSE:
@@ -389,7 +406,7 @@ app.post("/api/generate-reel", async (req, res) => {
     Each scene's googleFlowPrompt MUST be built in this strict sequence:
     "Identity: Native Google Flow Avatar, maintain consistent Indian advocate identity across all scenes. Appearance: Black advocate coat, crisp white shirt, formal professional legal appearance, realistic human proportions (no influencer styling, no cinematic superhero styling, no artificial beauty filter). Continuity: [Scene 1: Initial Native Avatar anchor / Scene 2 & 3: Visual continuity linked directly to frame_scene_X.png]. Environment: [Realistic professional legal environment matching topic]. Action: [visualAction]. Natural lip synchronization for professional Hinglish legal explanation. Camera: [cameraInstruction]. Realism: Natural facial expressions, natural blinking, natural eye and head movement, natural hand gestures, natural body movement, natural lighting, realistic video (no plastic skin, no uncanny facial features). Negative constraints: [negativeConstraints]."
       `;
-    } else if (profile === "ai-influencer") {
+    } else if (targetProfile === "ai-influencer") {
       profileRules = `
     PROFILE: AI Influencer
     ENVIRONMENT LOCK: REAL_LOCATION_LOCK = false
@@ -399,12 +416,15 @@ app.post("/api/generate-reel", async (req, res) => {
     - environmentMaster: "STUDIO_LOFT_MASTER"
     - voiceMaster: "INFLUENCER_VOICE_MASTER"
 
-    STRICT RULES:
+    STRICT RULES & 3-SCENE PRODUCTION WORKFLOW (EXACTLY 3 CONNECTED SCENES):
     1. Maintain consistent identity, face, hairstyle, clothing across scenes using INFLUENCER_MODEL_MASTER.
     2. Focus on entertaining, trendy, or fashion content.
-    3. Continuity: Frame-to-frame continuity required.
+    3. Continuity:
+       - Scene 1: continuityReference: "None (Initial Setup)", finalFrameToSave: "frame_scene_1.png"
+       - Scene 2: continuityReference: "frame_scene_1.png", finalFrameToSave: "frame_scene_2.png"
+       - Scene 3: continuityReference: "frame_scene_2.png", finalFrameToSave: "frame_scene_3.png"
       `;
-    } else if (profile === "no-person") {
+    } else if (targetProfile === "no-person") {
       profileRules = `
     PROFILE: No-Person Cinematic (Style-Locked)
     ENVIRONMENT LOCK: REAL_LOCATION_LOCK = false (Aesthetic / Style-Locked across scenes)
@@ -436,7 +456,7 @@ app.post("/api/generate-reel", async (req, res) => {
     CRITICAL OUTPUT FORMATTING & CONSTRAINTS:
     1. Output strictly valid JSON matching the schema.
     2. Output environmentLock = true for 'wife-teacher', 'ame-bazaar', and 'maheshwari-counsel'.
-    3. SCENE COUNT: Output EXACTLY 3 connected scenes for 'wife-teacher', 'ame-bazaar', and 'maheshwari-counsel'.
+    3. SCENE COUNT: Output EXACTLY 3 connected scenes for all profiles.
     4. Ensure every scene includes valid 'masterReferences', 'cameraInstruction', 'negativeConstraints', and detailed 'googleFlowPrompt'.
     5. ABSOLUTELY NO REPEATED TEXT, NO FILLER PARAGRAPHS, NO SYSTEM COMMENTARY, NO META-NOTES.
     6. Never leave any required field empty.

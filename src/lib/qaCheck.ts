@@ -7,13 +7,20 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
   const isAmeBazaar = profile === 'ame-bazaar';
   const isLawyerCounsel = profile === 'maheshwari-counsel';
   const isNoPerson = profile === 'no-person';
+  const isAiInfluencer = profile === 'ai-influencer';
 
   // Rule 1: Environment Lock / Style Lock Active
   checks.push({
     id: 'env_lock',
-    rule: isNoPerson ? 'Cinematic Style-Lock Active' : 'Environment Lock Active (REAL_LOCATION_LOCK)',
-    passed: isNoPerson ? true : plan.environmentLock === true,
-    details: isNoPerson ? 'Style-locked cinematic mode active across scenes.' : (plan.environmentLock ? 'Location lock is strictly enforced.' : 'Environment lock is inactive.')
+    rule: isNoPerson 
+      ? 'Cinematic Style-Lock Active' 
+      : (isAiInfluencer ? 'Identity Lock Active (INFLUENCER_MODEL_MASTER)' : 'Environment Lock Active (REAL_LOCATION_LOCK)'),
+    passed: (isNoPerson || isAiInfluencer) ? true : plan.environmentLock === true,
+    details: isNoPerson 
+      ? 'Style-locked cinematic mode active across scenes.' 
+      : (isAiInfluencer 
+          ? 'AI Influencer identity lock active across scenes.' 
+          : (plan.environmentLock ? 'Location lock is strictly enforced.' : 'Environment lock is inactive.'))
   });
 
   // Rule 2: Non-empty Scenes
@@ -254,6 +261,30 @@ export function runProductionQA(plan: FastReelPlan, profile: string): Production
           rule: `Scene ${sceneNum}: Zero-Human Compliance (No avatars/faces/lip-sync)`,
           passed: zeroHumanPassed,
           details: zeroHumanPassed ? 'Zero-human compliance verified' : 'Human or lip-sync detected'
+        });
+      } else if (isAiInfluencer) {
+        const hasCharMaster = !!(scene.masterReferences?.characterMaster && scene.masterReferences.characterMaster.includes('INFLUENCER_MODEL_MASTER'));
+        checks.push({
+          id: `s${sceneNum}_char_master`,
+          rule: `Scene ${sceneNum}: Influencer Model Master attached`,
+          passed: hasCharMaster,
+          details: scene.masterReferences?.characterMaster || 'Missing character master'
+        });
+
+        const hasEnvMaster = !!(scene.masterReferences?.environmentMaster && scene.masterReferences.environmentMaster.includes('STUDIO_LOFT_MASTER'));
+        checks.push({
+          id: `s${sceneNum}_env_master`,
+          rule: `Scene ${sceneNum}: Studio Loft Master attached`,
+          passed: hasEnvMaster,
+          details: scene.masterReferences?.environmentMaster || 'Missing environment master'
+        });
+
+        const hasVoiceMaster = !!(scene.masterReferences?.voiceMaster && scene.masterReferences.voiceMaster.includes('INFLUENCER_VOICE_MASTER'));
+        checks.push({
+          id: `s${sceneNum}_voice_master`,
+          rule: `Scene ${sceneNum}: Influencer Voice Master attached`,
+          passed: hasVoiceMaster,
+          details: scene.masterReferences?.voiceMaster || 'Missing voice master'
         });
       }
 
