@@ -82,3 +82,11 @@ SUCCESS
 --------------------------------------------------
 
 The protocol is successful when any supported AI can generate consistent Google Flow prompts from the repository without relying on previous conversation history.
+
+--------------------------------------------------
+RECOVERED CONTEXT & OPERATIONAL GUIDES
+--------------------------------------------------
+
+For comprehensive recovered project history, architectural decisions, and ecosystem context:
+- See `PROJECT_CONTEXT_RECOVERY.md` (file:///C:/Users/admin/antigravity/AI-REEL-VIDEO-DESIGN/PROJECT_CONTEXT_RECOVERY.md)
+- See `AGENTS_CONTEXT.md` (file:///C:/Users/admin/antigravity/AI-REEL-VIDEO-DESIGN/AGENTS_CONTEXT.md) for quick operational onboarding
